@@ -1,0 +1,10 @@
+en:
+  hello: "Hello world"
+  activemodel:
+    errors:
+      models:
+        authenticate_user:
+          failure: "Wrong email or password"
+        authenticate_api_request:
+          invalid_token: "Invalid token"
+          missing_token: "Missing token"

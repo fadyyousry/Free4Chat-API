@@ -6,6 +6,7 @@ ruby '2.7.1'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.1'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -20,9 +21,6 @@ gem 'bootsnap', '>= 1.4.2', require: false
 
 #gem 'rack-cors'
 
-gem 'jwt'
-gem 'simple_command'
-
 group :development, :test do
   gem 'faker'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -35,3 +33,7 @@ group :development do
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'jwt'
+gem 'simple_command'
+gem 'cancancan'

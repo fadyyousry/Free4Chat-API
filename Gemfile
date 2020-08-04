@@ -19,7 +19,7 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 
-#gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'faker'

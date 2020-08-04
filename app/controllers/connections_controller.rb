@@ -19,12 +19,24 @@ class ConnectionsController < ApplicationController
     end
   end
 
+  def update
+    if @connection.update(status_param)
+      render json: @connection
+    else
+      render json: @connection.errors, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @connection.destroy
   end
 
   private
+    def status_param
+      params.require(:connection).permit(:status)
+    end
+
     def connection_params
-      params.require(:connection).permit(:chat_id)
+      params.require(:connection).permit(:chat_id, :status)
     end
 end

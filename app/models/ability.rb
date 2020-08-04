@@ -9,7 +9,7 @@ class Ability
 
     can :read, Connection
     can [:create, :destroy], Connection, user_id: user.id
-    can :destroy, Connection, chat_id: user.owned_chat_ids
+    can :update, Connection, chat_id: user.owned_chat_ids
 
     can :read, Message
     can :create, Message, chat_id: user.chat_ids

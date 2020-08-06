@@ -1,17 +1,23 @@
-module ApplicationCable
-  class Connection < ActionCable::Connection::Base
+module ApplicationCable        
+  class Connection < ActionCable::Connection::Base 
     identified_by :current_user
-
-    def connect
+ 
+    def connect                
       self.current_user = find_verified_user
     end
-
+ 
     private
-      def find_verified_user
-        if verified_user = User.find_by(id: cookies.encrypted[:user_id])
-          verified_user
-        else
-          reject_unauthorized_connection
+      def find_verified_user   
+        begin
+          token = request.headers[:HTTP_SEC_WEBSOCKET_PROTOCOL].split(' ').last
+          decoded_token = JsonWebToken.decode(token)
+          if (current_user = User.find(decoded_token["user_id"]))
+            current_user
+          else                 
+            reject_unauthorized_connection
+          end
+        rescue
+          reject_unauthorized_connection  
         end
       end
   end

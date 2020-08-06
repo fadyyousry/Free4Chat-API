@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    can :read, User, id: user.id
     can :destroy, User, id: user.id
 
     can :read, Chat

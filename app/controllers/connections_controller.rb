@@ -1,12 +1,14 @@
 class ConnectionsController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource :only => :is_connected
 
   def index
-    render json: @connections
+    render json: @connections.where(chat_id: params[:chat_id])
   end
 
-  def show
-    render json: @connections
+  def is_connected
+    @connection = current_user.connections.where(chat_id: params[:chat_id])
+    render :json => {connected:  @connection.exists?}
   end
 
   def create
@@ -37,6 +39,6 @@ class ConnectionsController < ApplicationController
     end
 
     def connection_params
-      params.require(:connection).permit(:chat_id, :status)
+      params.require(:connection).permit(:chat_id)
     end
 end

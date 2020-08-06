@@ -2,7 +2,11 @@ class ChatsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    render json: @chats
+    if (params[:mine])
+      render json: current_user.chats
+    else
+      render json: @chats
+    end
   end
 
   def show

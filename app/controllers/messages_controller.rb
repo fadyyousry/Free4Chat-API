@@ -3,7 +3,7 @@ class MessagesController < ApplicationController
   load_and_authorize_resource :message, through: :chat
 
   def index
-    render json: @messages
+    render json: @messages.map { |message| message.response_json}
   end
 
   def show
@@ -14,7 +14,7 @@ class MessagesController < ApplicationController
     @message = @chat.messages.build(message_params)
     @message.user = current_user
     if @message.save
-      ChatChannel.broadcast_to(@chat, @message)
+      ChatChannel.broadcast_to(@chat, @message.response_json)
       render json: @message, status: :created, location: [@chat, @message]
     else
       render json: @message.errors, status: :unprocessable_entity

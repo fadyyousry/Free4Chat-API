@@ -4,5 +4,5 @@ class Chat < ApplicationRecord
   has_many :messages
   belongs_to :user, foreign_key: "owner_id"
   
-  validates :name, uniqueness: true
+  validates :name, uniqueness: true, presence: true, allow_blank: false
 end
